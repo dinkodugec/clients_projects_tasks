@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,5 @@ Route::get('/', function () {
 
 Route::resource('projects', ProjectController::class);
 /* Route::resource('project', ProjectController::class); */
+
+Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
