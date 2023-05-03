@@ -14,8 +14,7 @@ class Client extends Model
         'company_address',
         'email',
         'company_city',
-        'contact_person',
-        'company_vat'
+        'contact_person'
 
     ];
 
