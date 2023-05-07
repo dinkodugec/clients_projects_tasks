@@ -18,6 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(); // register all routes that register and login users
+Auth::routes(['verify' => true]); // register all routes that register and login users
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
