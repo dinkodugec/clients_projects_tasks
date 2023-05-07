@@ -11,13 +11,15 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
+                     {{--    all input fields for registration are validate in namespace App\Http\Controllers\Auth - RegisterController
+                        and also middleware 'guest' is there. Create method is accept data from form down here and save in DB --}}
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
+                                       {{-- old -helper function to show old value --}}
+                                @error('name')  {{--  $error - global errors blade variable- collection of all errors related for a form, and there are some methods like $error->has('name') --}}
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
