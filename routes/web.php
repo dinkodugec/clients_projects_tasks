@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['verify' => true]); // register all routes that register and login users
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
