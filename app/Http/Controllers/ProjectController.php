@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
+use App\Models\Client;
+use App\Models\User;
+use Illuminate\Support\Facades\Request;
 
 class ProjectController extends Controller
 {
@@ -25,7 +28,26 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+         /*    $status = Project::select('status')
+       ->get(); // Iget staus value from const direct in Blade, so there was not need for get Status from db
+ */
+
+           /*  $clients = Client::select('company_name','id')
+            ->get(); */
+
+            $clients = Client::pluck('company_name','id');
+            //The pluck method retrieves all of the values for a given key
+
+
+
+            $users = User::pluck('name', 'id');
+
+
+
+        return view('admin.project.create') ->with([
+        'clients' => $clients,
+        'users' => $users
+        ]);
     }
 
     /**
@@ -36,7 +58,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        //
+
     }
 
     /**

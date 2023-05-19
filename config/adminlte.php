@@ -321,17 +321,27 @@ return [
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => 'profile',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
             'text' => 'Projects',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'url'  => '/project',
+            'icon' => 'fas fa-fw fa-file',
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Tasks',
+            'url'  => '/task',
+            'icon' => 'fas fa-fw fa-share',
+        ],
+        [
+            'text' => 'Clients',
+            'url'  => '/client',
+            'icon' => 'fas fa-fw fa-eye',
+        ],
+        [
+            'text'    => 'Wish add something else',
+            'icon'    => '',
             'submenu' => [
                 [
                     'text' => 'level_one',

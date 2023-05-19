@@ -71,6 +71,17 @@ class UserController extends Controller
         //
     }
 
+       /**
+     * Profile of specific user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function profile($id)
+    {
+        return view('admin.user.profile');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
