@@ -24,7 +24,8 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+           /*  'title' => 'bail|equired|unique:project|max:50',
+            'description' => 'required|max:255', */
         ];
     }
 }

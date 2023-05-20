@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
-use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Session;
+/*  use Illuminate\Support\Facades\Request;  */
+use Illuminate\Http\Request;
+
 
 class ProjectController extends Controller
 {
@@ -28,9 +30,9 @@ class ProjectController extends Controller
      */
     public function create()
     {
-         /*    $status = Project::select('status')
-       ->get(); // Iget staus value from const direct in Blade, so there was not need for get Status from db
- */
+            /*    $status = Project::select('status')
+                 ->get(); // get stauts value from const direct in Blade, so there was not need for get Status from db
+             */
 
            /*  $clients = Client::select('company_name','id')
             ->get(); */
@@ -38,16 +40,15 @@ class ProjectController extends Controller
             $clients = Client::pluck('company_name','id');
             //The pluck method retrieves all of the values for a given key
 
-
-
             $users = User::pluck('name', 'id');
 
 
 
-        return view('admin.project.create') ->with([
+        return view('project.create') ->with([
         'clients' => $clients,
         'users' => $users
         ]);
+
     }
 
     /**
@@ -56,8 +57,34 @@ class ProjectController extends Controller
      * @param  \App\Http\Requests\StoreProjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProjectRequest $request)
+    public function store(Request $request)
     {
+
+       /*  dd($request); */
+
+           $request->validate([
+            'title' => 'bail|required|max:50',
+          /*   'title' => ['bail'],['required'],['unique:project']['max:50'], it can be also lika an array */
+            'description' => 'required|max:255',
+        ]); //if true, if it is valid, validate() method will move from request and go on to...
+            //if not, throw a ValidationException
+
+            $project = new Project();
+
+            $project->title = $request->input('title');
+            $project->description = $request->input('description');
+            $project->status = $request->input('status');
+            $project->client_id = $request->input('client_id');
+            $project->user_id = $request->input('user_id');
+            $project->deadline = $request->input('deadline');
+
+
+
+        $project->save();
+
+
+
+        return redirect('/');
 
     }
 
