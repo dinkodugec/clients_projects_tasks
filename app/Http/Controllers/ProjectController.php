@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Session;
 /*  use Illuminate\Support\Facades\Request;  */
 use Illuminate\Http\Request;
+use \App\Http\Requests\StoreProjectRequest;
 
 
 class ProjectController extends Controller
@@ -57,17 +58,11 @@ class ProjectController extends Controller
      * @param  \App\Http\Requests\StoreProjectRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
 
-       /*  dd($request); */
+            $request->validated();
 
-           $request->validate([
-            'title' => 'bail|required|max:50',
-          /*   'title' => ['bail'],['required'],['unique:project']['max:50'], it can be also lika an array */
-            'description' => 'required|max:255',
-        ]); //if true, if it is valid, validate() method will move from request and go on to...
-            //if not, throw a ValidationException
 
             $project = new Project();
 
@@ -84,7 +79,7 @@ class ProjectController extends Controller
 
 
 
-        return redirect('/');
+        return redirect('/admin');
 
     }
 
@@ -119,7 +114,7 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $request->validated();
     }
 
     /**

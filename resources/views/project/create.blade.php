@@ -21,7 +21,7 @@
             <div class="card">
                 <div class="card-header">Create New Project</div>
                 <div class="card-body">
-                    <form autocomplete="off" method="POST" action="/project">
+                    <form autocomplete="off" method="POST" action="/project"> {{-- {{ route('project.create') }} --}}
                         @csrf
                         <div class="form-group">
                             <label for="name">Title</label>
