@@ -21,7 +21,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+
+     /*    dd($projects); */
+
+        return view('project.index')->with([
+            'projects' => $projects
+        ]);
     }
 
     /**
@@ -77,7 +83,7 @@ class ProjectController extends Controller
 
         $project->save();
 
-
+        $request->session()->flash('status', 'The Project was created!');
 
         return redirect('/admin');
 
@@ -102,7 +108,19 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+
+        $clients = Client::pluck('company_name','id');
+        //The pluck method retrieves all of the values for a given key
+
+        $users = User::pluck('name', 'id');
+
+       return view('project.edit')->with([
+        'project' => $project,
+        'clients' => $clients,
+        'users' => $users
+       ]);
+
+       session()->flash('status', 'The Project was edited!');
     }
 
     /**
@@ -115,6 +133,21 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         $request->validated();
+
+
+        $project->update([
+            'title' => $request['title'],
+            'description' => $request['description'],
+            'status' => $request['status'],
+            'client_id' => $request['client_id'],
+            'user_id' => $request['user_id'],
+
+        ]);
+
+        session()->flash('status', 'The Project was edited!');
+
+        return $this->index();
+
     }
 
     /**
@@ -125,6 +158,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return $this->index();
     }
 }
