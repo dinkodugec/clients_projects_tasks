@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 /*  use Illuminate\Support\Facades\Request;  */
 use Illuminate\Http\Request;
 use \App\Http\Requests\StoreProjectRequest;
+use Illuminate\Support\Facades\DB; //enable database loging
 
 
 class ProjectController extends Controller
@@ -21,9 +22,24 @@ class ProjectController extends Controller
      */
     public function index()
     {
+/*
+       /********   EAGER LOADING    -   $projects = Project::with('client')->get();      -     EAGER LOADING    ******* /
+
         $projects = Project::all();
 
-     /*    dd($projects); */
+        DB::enableQueryLog(); //enable database loging
+
+        foreach ($projects as $project) {
+            foreach ($project->client as $client) {
+                 echo $client->company_name;
+              }
+          }
+
+         dd(DB::getQueryLog());  THIS IS LAZY LOADING - specific column from database - IT can slow preformance when are too many queries */
+
+       
+
+        $projects = Project::all();
 
         return view('project.index')->with([
             'projects' => $projects
