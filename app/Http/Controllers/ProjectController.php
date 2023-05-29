@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
          dd(DB::getQueryLog());  THIS IS LAZY LOADING - specific column from database - IT can slow preformance when are too many queries */
 
-       
+
 
         $projects = Project::all();
 
