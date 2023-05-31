@@ -9,6 +9,15 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'company_name',
+        'company_address',
+        'email',
+        'company_city',
+        'contact_person',
+       
+    ];
+
     public function projects()
     {
         return $this->hasMany(Project::class);

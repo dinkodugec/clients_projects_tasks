@@ -15,7 +15,11 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+
+        return view('clients.index')->with([
+            'clients' => $clients
+        ]);
     }
 
     /**
@@ -25,7 +29,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('clients.create');
     }
 
     /**
@@ -36,7 +40,26 @@ class ClientController extends Controller
      */
     public function store(StoreClientRequest $request)
     {
-        //
+        $request->validated();
+
+        /* dd($request); */
+
+        $client = new Client();
+
+        $client->company_name = $request->input('company_name');
+        $client->company_address = $request->input('company_address');
+        $client->email  = $request->input('email');
+        $client->company_city = $request->input('company_city');
+        $client->contact_person = $request->input('contact_person');
+
+
+
+
+    $client->save();
+
+    $request->session()->flash('status', 'The Client was created!');
+
+    return redirect('/admin');
     }
 
     /**
@@ -58,7 +81,13 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit')->with([
+
+            'client' => $client,
+
+           ]);
+
+           session()->flash('status', 'The Client was edited!');
     }
 
     /**
@@ -70,7 +99,19 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $request->validated();
+
+        $client->update([
+            'company_name' => $request['company_name'],
+            'company_address' => $request['company_address'],
+            'email ' => $request['email '],
+            'company_city' => $request['company_city'],
+            'contact_person' => $request['contact_person'],
+        ]);
+
+        session()->flash('status', 'The Client was edited!');
+
+        return $this->index();
     }
 
     /**
@@ -81,6 +122,8 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        $client->delete();
+
+        return $this->index();
     }
 }

@@ -36,7 +36,7 @@
             @endif
                 <div class="card-header">Edit a Project</div>
                 <div class="card-body">
-                    <form class="form-control" autocomplete="off" action="/project/{{$project->id}}" method="post" >
+                    <form class="form-control" autocomplete="off" action="/project/{{$project->id}}" method="POST" >
                         @csrf
                         @method('PUT')
                         <div class="form-group">

@@ -13,7 +13,7 @@ class UpdateClientRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,11 @@ class UpdateClientRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'company_name' => 'bail|required|max:50',
+            'company_address' => 'required|max:255',
+            'email ' => 'email:rfc,dns',
+            'company_city' => 'required|max:50',
+            'contact_person' => 'required|max:50',
         ];
     }
 }
