@@ -33,6 +33,7 @@ Route::get('/user-profile', [App\Http\Controllers\UserController::class, 'profil
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
 Route::resource('/project', ProjectController::class);
+Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'projects'])->name('projects');
 
 Route::resource('/client', ClientController::class);
 

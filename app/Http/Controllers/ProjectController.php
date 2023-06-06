@@ -178,4 +178,21 @@ class ProjectController extends Controller
 
         return $this->index();
     }
+
+
+    public function projects()
+    {
+
+        $projects = Project::all();
+        $trashedProjects = Project::onlyTrashed()->get(); //trashed projects
+
+        /* dd($trashedProjects); */
+
+         return view('project.projects')->with([
+            'trashedProjects' =>  $trashedProjects,
+            'projects' => $projects
+         ]);
+
+
+    }
 }
