@@ -15,11 +15,13 @@ class Client extends Model
         'email',
         'company_city',
         'contact_person',
-       
+
     ];
 
     public function projects()
     {
         return $this->hasMany(Project::class);
     }
+
+
 }

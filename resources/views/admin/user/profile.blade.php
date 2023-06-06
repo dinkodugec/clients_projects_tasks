@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Make a profile for user: {{ $id }}</p>
 @stop
 
 @section('css')

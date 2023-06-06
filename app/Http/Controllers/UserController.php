@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -77,9 +78,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function profile($id)
+    public function profile()
     {
-        return view('admin.user.profile');
+        $id = Auth::user()->id;
+
+        return view('admin.user.profile')->with([
+            'id'=>$id
+        ]);
     }
 
     /**

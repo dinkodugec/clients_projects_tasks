@@ -29,7 +29,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
 
-Route::get('/user-profile/{id}', [App\Http\Controllers\UserController::class, 'profile'])->name('user-profile');
+Route::get('/user-profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user-profile');
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
 Route::resource('/project', ProjectController::class);
