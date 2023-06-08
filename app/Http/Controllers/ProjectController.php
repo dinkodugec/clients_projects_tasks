@@ -39,7 +39,7 @@ class ProjectController extends Controller
 
 
 
-        $projects = Project::all();
+        $projects = Project::latest()->get(); //latest is LatestScope from Project Model
 
         return view('project.index')->with([
             'projects' => $projects
@@ -183,7 +183,7 @@ class ProjectController extends Controller
     public function projects()
     {
 
-        $projects = Project::all();
+        $projects = Project::latest()->get();
         $trashedProjects = Project::onlyTrashed()->get(); //trashed projects, where deleted_at is not null
         //soft delete is eloquent trait
         /* dd($trashedProjects); */
