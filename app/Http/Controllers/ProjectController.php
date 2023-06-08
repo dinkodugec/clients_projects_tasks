@@ -184,8 +184,8 @@ class ProjectController extends Controller
     {
 
         $projects = Project::all();
-        $trashedProjects = Project::onlyTrashed()->get(); //trashed projects
-
+        $trashedProjects = Project::onlyTrashed()->get(); //trashed projects, where deleted_at is not null
+        //soft delete is eloquent trait
         /* dd($trashedProjects); */
 
          return view('project.projects')->with([
@@ -193,6 +193,28 @@ class ProjectController extends Controller
             'projects' => $projects
          ]);
 
+
+    }
+
+    public function restore($id)
+    {
+
+
+        $trashedProjects = Project::onlyTrashed()->findOrFail($id);
+
+        $trashedProjects->restore();
+
+        return redirect('/projects');
+
+
+    }
+
+    public function forceDelete($id)
+    {
+        $trashedProjects = Project::onlyTrashed()->findOrFail($id);
+        $trashedProjects->forceDelete();
+
+        return redirect('/projects');
 
     }
 }

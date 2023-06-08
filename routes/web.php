@@ -32,8 +32,11 @@ Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->na
 Route::get('/user-profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user-profile');
 Route::resource('/user', App\Http\Controllers\UserController::class);
 
-Route::resource('/project', ProjectController::class);
+Route::post('projects/{id}/restore', [App\Http\Controllers\ProjectController::class, 'restore'])->name('projects.restore');
+Route::post('projects/{id}/forceDelete', [App\Http\Controllers\ProjectController::class, 'forceDelete'])->name('projects.force.delete');
 Route::get('/projects', [App\Http\Controllers\ProjectController::class, 'projects'])->name('projects');
+Route::resource('/project', ProjectController::class);
+
 
 Route::resource('/client', ClientController::class);
 

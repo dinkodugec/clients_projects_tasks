@@ -38,7 +38,7 @@
 
         <div class="col">
             <div class="card">
-                <div class="card-header">{{ __('Deleted Projects') }}</div>
+                <div class="card-header">{{ __('Archived Projects') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -52,6 +52,8 @@
                           <tr>
                             <th scope="col">Title</th>
                             <th scope="col">Deleted At</th>
+                            <th scope="col">Restore a project</th>
+                            <th scope="col">Delete Forever</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -59,11 +61,23 @@
                             <tr>
                                 <td>{{ $trashedProject->title}}</td>
                                 <td>{{ $trashedProject->deleted_at}}</td>
+                                @if ($trashedProject->trashed())
+                                <td>
+
+                                       <form action="{{ route('projects.restore', $trashedProject->id) }}"  style="display: inline" method="POST">
+                                         @csrf
+                                           <input class="btn btn-danger" type="submit" value="Restore Project">
+                                       </form>
+                               </td>
+                               <td>
+                                       <form action="{{ route('projects.force.delete', $trashedProject->id) }}"  method="POST">
+                                        @csrf
+                                        <input class="btn btn-danger" style="display: inline" value="Delete Forever" type="submit">
+                                      </form>
+                               </td>
                             </tr>
-
+                             @endif
                             @endforeach
-
-
                         </tbody>
                       </table>
                 </div>
