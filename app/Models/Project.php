@@ -56,4 +56,5 @@ class Project extends Model
     {
         return $query->orderBy(static::CREATED_AT, 'desc');
     }
+
 }
