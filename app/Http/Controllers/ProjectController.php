@@ -194,7 +194,8 @@ class ProjectController extends Controller
             'trashedProjects' =>  $trashedProjects,
             'projects' => $projects,
             'clients_most_projects' => Client::mostProjects()->take(5)->get(),
-            'clients' => $clients
+            'clients' => $clients,
+            'user_with_most_projects' => User::UserWithMostProjects()->take(5)->get(),
          ]);
 
 

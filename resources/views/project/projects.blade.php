@@ -83,9 +83,13 @@
                       </table>
                 </div>
             </div>
-            <div class="col-8 mt-4">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body mt-4">
+
+
+         <div class="row ml-5 mt-5">
+
+            <div class="col-6">
+              <div class="card" style="width: 18rem;">
+                    <div class="card-body mt-2">
                         <h5 class="card-title">Clients with most projects</h5>
                         <h6 class="card-subtitle mb-2 text-muted">
                             Our most valuable clinets with most projects
@@ -102,8 +106,33 @@
                     </ul>
                 </div>
             </div>
+
+
+
+            <div class="col-4">
+              <div class="card" style="width: 18rem;">
+                    <div class="card-body mt-2">
+                        <h5 class="card-title">Users with most projects</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            Our most valuable clinets with most projects
+                        </h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                          @foreach ($user_with_most_projects as $mostProject)
+                            <li class="list-group-item">
+                                    {{ $mostProject->name}}
+                                </a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
+
+
+        </div>
     </div>
 
     <div class="row">
