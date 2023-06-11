@@ -190,12 +190,14 @@ class ProjectController extends Controller
 
         $clients = Client::all();
 
+
          return view('project.projects')->with([
             'trashedProjects' =>  $trashedProjects,
             'projects' => $projects,
             'clients_most_projects' => Client::mostProjects()->take(5)->get(),
             'clients' => $clients,
             'user_with_most_projects' => User::UserWithMostProjects()->take(5)->get(),
+            'user_with_most_projects_last_month' => User::WithMostProjectsLastMonth()->take(4)->get(),
          ]);
 
 

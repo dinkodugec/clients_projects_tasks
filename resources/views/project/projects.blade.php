@@ -145,13 +145,13 @@
                         </h6>
                     </div>
                     <ul class="list-group list-group-flush">
-                       {{--  @foreach ($mostProjects as $post)
+                       @foreach ($user_with_most_projects_last_month as $user)
                             <li class="list-group-item">
-                                <a href="{{ route('posts.show', ['post' => $post->id]) }}">
-                                    {{ $post->title }}
+                                <a href="{{ route('user.show', ['post' => $user->id]) }}">
+                                    {{ $user->name }}
                                 </a>
                             </li>
-                        @endforeach --}}
+                        @endforeach -
                     </ul>
                 </div>
             </div>
