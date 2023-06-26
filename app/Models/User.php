@@ -57,6 +57,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function scopeWithMostProjectsLastMonth(EloquentBuilder  $query)
     {
+
         return $query->withCount(['projects' => function (EloquentBuilder  $query) {
             $query->whereBetween(static::CREATED_AT, [now()->subWeeks(3), now()]);
         }])->having('projects_count', '>=', 2)
