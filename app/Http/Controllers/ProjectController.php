@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 /*  use Illuminate\Support\Facades\Request;  */
 use Illuminate\Http\Request;
 use \App\Http\Requests\StoreProjectRequest;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB; //enable database loging
 
 
@@ -190,13 +191,21 @@ class ProjectController extends Controller
 
         $clients = Client::all();
 
+        $UserWithMostProject = Cache::remember('UserWithMostProject', 60, function() {
+            return User::UserWithMostProjects()->take(5)->get();
+        });
+
+        $clientWithMostProjects = Cache::remember('clientWithMostProjects', 60, function() {
+            return Client::mostProjects()->take(5)->get();
+        });
+
 
          return view('project.projects')->with([
             'trashedProjects' =>  $trashedProjects,
             'projects' => $projects,
-            'clients_most_projects' => Client::mostProjects()->take(5)->get(),
+            'clients_most_projects' => $clientWithMostProjects,
             'clients' => $clients,
-            'user_with_most_projects' => User::UserWithMostProjects()->take(5)->get(),
+            'user_with_most_projects' => $UserWithMostProject,
             'user_with_most_projects_last_month' => User::WithMostProjectsLastMonth()->take(4)->get(),
          ]);
 
